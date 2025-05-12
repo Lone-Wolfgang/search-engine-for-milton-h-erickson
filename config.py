@@ -12,8 +12,8 @@ DEBUG = False
 #                         Dynamically updated with SUBQUERY_KWARGS.
 
 INDEX_NAME = "documents"
-OPENSEARCH_HOST = {"host": "localhost", "port": 9201}
-MODEL_ID = "yG9kt5YB6HzrsoQbSygM"
+OPENSEARCH_HOST = {"host": "localhost", "port": 9200}
+MODEL_ID = "<YOUR MODEL ID>"
 HYBRID_PIPELINE_ID = 'hybrid_reranker'
 
 #Controls the text displayed in the user interface.
