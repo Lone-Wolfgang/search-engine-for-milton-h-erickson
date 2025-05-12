@@ -104,8 +104,11 @@ The indexing pipeline generates embeddings for the `title`, `headers`, and `body
 
 ### Run the Indexing Script
 
-After configuring your index and ensuring your documents are in the expected format, run the following:
+After configuring your index and ensuring your documents are in the expected format, it time to index.
 
+**Place your documents into a folder called {root}/documents**
+
+Then, run the following script.
 ```bash
 python ingest.py
 ```
