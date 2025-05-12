@@ -64,3 +64,70 @@ If you're using the default settings, you can access OpenSearch Dashboards at:
 
 http://localhost:5601/app/home#/
 
+## Deploying the Semantic Search Model
+
+The final setup step is to deploy the model used for semantic search. OpenSearch provides access to several pretrained models with varying language coverage and performance characteristics.
+
+For this project, the selected model is:
+
+**`huggingface/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`**
+
+This is a lightweight multilingual model that balances efficiency with relevance and supports a global user base.
+
+To deploy the model, follow the official OpenSearch documentation:  
+[https://docs.opensearch.org/docs/latest/ml-commons-plugin/pretrained-models/](https://docs.opensearch.org/docs/latest/ml-commons-plugin/pretrained-models/)
+
+After successful deployment, OpenSearch will return a `model_id`.  
+Save this `model_id` to your `config.py` file.
+
+Once the model ID is configured, the semantic search pipeline is staged and ready to use.
+
+## Indexing Your Documents
+
+The indexing script provided in this project is currently hardcoded for the documents used during development. If you are building your own search engine with a different document set or structure, you will need to modify the script accordingly.
+
+The following fields are extracted during indexing:
+
+**Content:**
+- `title`
+- `headers`
+- `body`
+
+**Metadata:**
+- `order`
+- `author`
+- `volume`
+- `section`
+- `chapter`
+
+The indexing pipeline generates embeddings for the `title`, `headers`, and `body`. These embeddings power the semantic search functionality. The model used is optimized for clustering multilingual sentences and short paragraphs. 
+
+### Run the Indexing Script
+
+After configuring your index and ensuring your documents are in the expected format, run the following:
+
+```bash
+python ingest.py
+```
+If your documents were properly indexed, you can browse and verify them in OpenSearch Dashboards:
+http://localhost:5601/app/home#/
+
+### Launching the App
+
+Once your documents are indexed and the model is deployed, you can launch the search interface.
+
+If you changed the configuration of the index, you will also need to update the relevant modules in `ux.py` to match your index structure.
+
+To start the app:
+
+```bash
+streamlit run app.py
+```
+Additional settings—such as the search algorithm, display layout, and model ID—can be configured in config.py.
+
+If you encounter issues or unexpected results, set DEBUG=True in config.py to view the search queries as they are dynamically generated. This can assist with troubleshooting.
+
+
+
+
+
